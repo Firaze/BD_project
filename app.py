@@ -25,12 +25,12 @@ h=5
 red = np.zeros((h, w, 3), dtype=np.uint8)
 red[0:]=[255, 0, 0]
 green = np.zeros((h, w, 3), dtype=np.uint8)
-green[0:]=[0, 255, 0]
-cyan = np.zeros((h, w, 3), dtype=np.uint8)
-cyan[0:]=[0, 255, 255]
+green[0:]=[0, 128, 0]
+blue = np.zeros((h, w, 3), dtype=np.uint8)
+blue[0:]=[0, 0, 255]
 yellow = np.zeros((h, w, 3), dtype=np.uint8)
 yellow[0:]=[255, 255,0]
-st.sidebar.image(cyan, caption='Expression edges')
+st.sidebar.image(blue, caption='Expression edges')
 st.sidebar.image(yellow, caption='Suppression edges')
 st.sidebar.image(green, caption='Part of triad edges')
 st.sidebar.image(red, caption='Removed edges')
