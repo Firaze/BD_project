@@ -14,11 +14,13 @@ pathways_name=pd.read_csv("data/pathways.tsv", sep='\t')["pathway_name"]
 #  html = self.template.render(height=height, width=width, nodes=nodes, edges=edges, options=options)
 #  return html
 
-#Network._repr_html_ = net_repr_html
-#st.sidebar.title('Choose a pathway')
-#option=st.sidebar.selectbox('',pathways_name)
+st.set_page_config(layout="wide")
 
-option=list(pathways_name.values)[25]
+#Network._repr_html_ = net_repr_html
+st.sidebar.title('Choose a pathway')
+option=st.sidebar.selectbox('',pathways_name)
+
+
 skip_calcs=False
 pathway_edges=read_pathway(option)
 if (len(pathway_edges)==0):
