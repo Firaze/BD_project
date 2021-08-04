@@ -19,6 +19,7 @@ st.set_page_config(layout="wide")
 #Network._repr_html_ = net_repr_html
 st.sidebar.title('Choose a pathway')
 option=st.sidebar.selectbox('',pathways_name)
+st.sidebar.text("Edge legend:")
 w=25
 h=5
 red = np.zeros((h, w, 3), dtype=np.uint8)
