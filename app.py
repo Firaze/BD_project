@@ -3,11 +3,12 @@ import streamlit.components.v1 as components
 import networkx as nx
 import matplotlib.pyplot as plt
 from pyvis.network import Network
+from functions import *
 import got 
 #Network(notebook=True)
 st.title('Hello Pyvis')
 # make Network show itself with repr_html
-
+pathways_name=pd.read_csv("data/pathways.tsv", sep='\t')["pathway_name"]
 #def net_repr_html(self):
 #  nodes, edges, height, width, options = self.get_network_data()
 #  html = self.template.render(height=height, width=width, nodes=nodes, edges=edges, options=options)
@@ -15,7 +16,7 @@ st.title('Hello Pyvis')
 
 #Network._repr_html_ = net_repr_html
 st.sidebar.title('Choose your favorite Graph')
-option=st.sidebar.selectbox('select graph',('Simple','Karate', 'GOT'))
+option=st.sidebar.selectbox('select graph',pathways_name)
 physics=st.sidebar.checkbox('add physics interactivity?')
 got.simple_func(physics)
 
