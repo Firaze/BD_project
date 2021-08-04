@@ -6,7 +6,6 @@ from pyvis.network import Network
 from functions import *
  
 #Network(notebook=True)
-st.title('Hello Pyvis')
 
 # make Network show itself with repr_html
 pathways_name=pd.read_csv("data/pathways.tsv", sep='\t')["pathway_name"]
@@ -58,7 +57,7 @@ if skip_calcs==False:
     relabel={}
     for e,node in enumerate( G.nodes()):
         relabel[e]=str(inv_nodes_renamed[node])
-    net=Network(height="700px",notebook=True,directed=True,width="100%", bgcolor='#222222', font_color='white')
+    net=Network(height="1000px",notebook=True,directed=True,width="100%", bgcolor='#222222', font_color='white')
     for i,node in relabel.items():
         net.add_node(str(node))
 
