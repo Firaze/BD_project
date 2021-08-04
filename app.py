@@ -19,7 +19,7 @@ st.set_page_config(layout="wide")
 #Network._repr_html_ = net_repr_html
 st.sidebar.title('Choose a pathway')
 option=st.sidebar.selectbox('',pathways_name)
-
+st.sidebar.color_picker('Pick A Color', '#00f900')
 
 skip_calcs=False
 pathway_edges=read_pathway(option)
