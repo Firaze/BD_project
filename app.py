@@ -88,5 +88,5 @@ net.hrepulsion(node_distance=120, central_gravity=0.0, spring_length=100, spring
 net.show("graph.html")
 HtmlFile = open("graph.html", 'r', encoding='utf-8')
 source_code = HtmlFile.read() 
- components.html(source_code, height = 900,width=900)
+components.html(source_code, height = 900,width=900)
 
