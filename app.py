@@ -9,7 +9,7 @@ st.title('Hello Pyvis')
 
 # make Network show itself with repr_html
 pathways_name=pd.read_csv("data/pathways.tsv", sep='\t')["pathway_name"]
-last_selection=list(pathways.name.values)[25]
+last_selection=list(pathways_name.values)[25]
 #def net_repr_html(self):
 #  nodes, edges, height, width, options = self.get_network_data()
 #  html = self.template.render(height=height, width=width, nodes=nodes, edges=edges, options=options)
