@@ -58,34 +58,34 @@ if skip_calcs==False:
     relabel={}
     for e,node in enumerate( G.nodes()):
         relabel[e]=str(inv_nodes_renamed[node])
-net=Network(height="700px",notebook=True,directed=True,width="100%", bgcolor='#222222', font_color='white')
-for i,node in relabel.items():
-    net.add_node(str(node))
+    net=Network(height="700px",notebook=True,directed=True,width="100%", bgcolor='#222222', font_color='white')
+    for i,node in relabel.items():
+        net.add_node(str(node))
 
-for edge in pathway_edges.values:
-        if(edge[2]==-1):
-            net.add_edge(str(edge[0]), str(edge[1]), color="yellow")
-        else:
-            net.add_edge(str(edge[0]), str(edge[1]))
-for triad in triad_cliques:
-    for i,x in enumerate(triad):
-        for j,y in enumerate(triad):
-            if ((str(inv_nodes_renamed[triad[i]])+","+str(inv_nodes_renamed[triad[j]])) in to_remove) or ((str(inv_nodes_renamed[triad[j]])+","+str(inv_nodes_renamed[triad[i]])) in to_remove):
-                color="red"
-                size=10
+    for edge in pathway_edges.values:
+            if(edge[2]==-1):
+                net.add_edge(str(edge[0]), str(edge[1]), color="yellow")
             else:
-                color="green"
-                size=3
-            weight=pathway_edges[(pathway_edges[0]==inv_nodes_renamed[triad[i]]) & (pathway_edges[1]==inv_nodes_renamed[triad[j]])]
-            if (weight.empty):
-                continue
-            weight=int(weight[2].values)
-            if (weight==1):
-                net.add_edge(str(inv_nodes_renamed[triad[i]]), str(inv_nodes_renamed[triad[j]]), color=color, width=size,title="Express")
-            else:
-                net.add_edge(str(inv_nodes_renamed[triad[i]]), str(inv_nodes_renamed[triad[j]]), color=color, width=size,title="Suppress")
-net.hrepulsion(node_distance=120, central_gravity=0.0, spring_length=100, spring_strength=0, damping=0.09)
-net.show("data/graph.html")
+                net.add_edge(str(edge[0]), str(edge[1]))
+    for triad in triad_cliques:
+        for i,x in enumerate(triad):
+            for j,y in enumerate(triad):
+                if ((str(inv_nodes_renamed[triad[i]])+","+str(inv_nodes_renamed[triad[j]])) in to_remove) or ((str(inv_nodes_renamed[triad[j]])+","+str(inv_nodes_renamed[triad[i]])) in to_remove):
+                    color="red"
+                    size=10
+                else:
+                    color="green"
+                    size=3
+                weight=pathway_edges[(pathway_edges[0]==inv_nodes_renamed[triad[i]]) & (pathway_edges[1]==inv_nodes_renamed[triad[j]])]
+                if (weight.empty):
+                    continue
+                weight=int(weight[2].values)
+                if (weight==1):
+                    net.add_edge(str(inv_nodes_renamed[triad[i]]), str(inv_nodes_renamed[triad[j]]), color=color, width=size,title="Express")
+                else:
+                    net.add_edge(str(inv_nodes_renamed[triad[i]]), str(inv_nodes_renamed[triad[j]]), color=color, width=size,title="Suppress")
+    net.hrepulsion(node_distance=120, central_gravity=0.0, spring_length=100, spring_strength=0, damping=0.09)
+    net.show("data/graph.html")
 HtmlFile = open("data/graph.html", 'r', encoding='utf-8')
 source_code = HtmlFile.read() 
 components.html(source_code, height = 900,width=900)
