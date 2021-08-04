@@ -38,14 +38,13 @@ st.sidebar.image(red, caption='Removed edges')
 skip_calcs=False
 pathway_edges=read_pathway(option)
 if (len(pathway_edges)==0):
-    option=last_selection
+    #option=last_selection
     skip_calcs=True
     st.error("Edges not found in eset file, try another pathway!")
 else:
     skip_calcs=False
-    last_selection=option
-pathway_edges=read_pathway(option)
-if skip_calcs==False:
+    #last_selection=option
+    pathway_edges=read_pathway(option)
     adj_matrix,nodes_renamed,inv_nodes_renamed=build_adj(pathway_edges)
     G = nx.from_numpy_matrix(adj_matrix)
     triad_cliques=get_triad(G)
@@ -100,7 +99,7 @@ if skip_calcs==False:
                     net.add_edge(str(inv_nodes_renamed[triad[i]]), str(inv_nodes_renamed[triad[j]]), color=color, width=size,title="Suppress")
     net.hrepulsion(node_distance=120, central_gravity=0.0, spring_length=100, spring_strength=0, damping=0.09)
     net.show("data/graph.html")
-HtmlFile = open("data/graph.html", 'r', encoding='utf-8')
-source_code = HtmlFile.read() 
-components.html(source_code, height = 850,width=1850)
+    HtmlFile = open("data/graph.html", 'r', encoding='utf-8')
+    source_code = HtmlFile.read() 
+    components.html(source_code, height = 850,width=1850)
 
