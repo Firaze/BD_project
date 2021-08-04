@@ -20,18 +20,17 @@ st.set_page_config(layout="wide")
 st.sidebar.title('Choose a pathway')
 option=st.sidebar.selectbox('',pathways_name)
 w=25
-h=10
+h=5
 red = np.zeros((h, w, 3), dtype=np.uint8)
 red[0:]=[255, 0, 0]
-w=25
-h=10
 green = np.zeros((h, w, 3), dtype=np.uint8)
 green[0:]=[0, 255, 0]
-w=25
-h=10
 cyan = np.zeros((h, w, 3), dtype=np.uint8)
-cyan[0:]=[0, 0, 200]
+cyan[0:]=[0, 255, 255]
+yellow = np.zeros((h, w, 3), dtype=np.uint8)
+yellow[0:]=[255, 255]
 st.sidebar.image(cyan, caption='Expression edges')
+st.sidebar.image(yellow, caption='Suppression edges')
 st.sidebar.image(green, caption='Triad edges')
 st.sidebar.image(red, caption='Removed edges')
 
