@@ -9,16 +9,14 @@ from functions import *
 
 # make Network show itself with repr_html
 pathways_name=pd.read_csv("data/pathways.tsv", sep='\t')["pathway_name"]
-last_selection=list(pathways_name.values)[25]
 #def net_repr_html(self):
 #  nodes, edges, height, width, options = self.get_network_data()
 #  html = self.template.render(height=height, width=width, nodes=nodes, edges=edges, options=options)
 #  return html
 
 #Network._repr_html_ = net_repr_html
-st.sidebar.title('Choose your favorite Graph')
-option=st.sidebar.selectbox('select graph',pathways_name)
-physics=st.sidebar.checkbox('add physics interactivity?')
+st.sidebar.title('Choose a pathway')
+option=st.sidebar.selectbox('',pathways_name)
 
 
 skip_calcs=False
@@ -87,5 +85,5 @@ if skip_calcs==False:
     net.show("data/graph.html")
 HtmlFile = open("data/graph.html", 'r', encoding='utf-8')
 source_code = HtmlFile.read() 
-components.html(source_code, height = 900,width=900)
+components.html(source_code, height = 100%,width=100%)
 
