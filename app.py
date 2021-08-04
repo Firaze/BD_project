@@ -28,7 +28,7 @@ green[0:]=[0, 255, 0]
 cyan = np.zeros((h, w, 3), dtype=np.uint8)
 cyan[0:]=[0, 255, 255]
 yellow = np.zeros((h, w, 3), dtype=np.uint8)
-yellow[0:]=[255, 255]
+yellow[0:]=[255, 255,0]
 st.sidebar.image(cyan, caption='Expression edges')
 st.sidebar.image(yellow, caption='Suppression edges')
 st.sidebar.image(green, caption='Triad edges')
