@@ -3,7 +3,8 @@ import streamlit.components.v1 as components
 import networkx as nx
 import matplotlib.pyplot as plt
 from pyvis.network import Network
-from functions import * 
+from functions import *
+ 
 #Network(notebook=True)
 st.title('Hello Pyvis')
 
@@ -28,7 +29,7 @@ if (len(pathway_edges)==0):
     skip_calcs=True
 else:
     skip_calcs=False
-    last_selection=option
+    last_selection=optionn
 pathway_edges=read_pathway(option)
 if skip_calcs==False:
     adj_matrix,nodes_renamed,inv_nodes_renamed=build_adj(pathway_edges)
