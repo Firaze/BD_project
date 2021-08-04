@@ -85,5 +85,5 @@ if skip_calcs==False:
     net.show("data/graph.html")
 HtmlFile = open("data/graph.html", 'r', encoding='utf-8')
 source_code = HtmlFile.read() 
-components.html(source_code, height = 100%,width=100%)
+components.html(source_code, height = 100%,width=1500)
 
