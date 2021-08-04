@@ -40,6 +40,7 @@ pathway_edges=read_pathway(option)
 if (len(pathway_edges)==0):
     option=last_selection
     skip_calcs=True
+    st.error("Edges not found in eset file, try another pathway!")
 else:
     skip_calcs=False
     last_selection=option
