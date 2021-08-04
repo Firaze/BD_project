@@ -9,7 +9,6 @@ st.title('Hello Pyvis')
 
 # make Network show itself with repr_html
 pathways_name=pd.read_csv("data/pathways.tsv", sep='\t')["pathway_name"]
-last_selection=list(pathways_name.values)[25]
 #def net_repr_html(self):
 #  nodes, edges, height, width, options = self.get_network_data()
 #  html = self.template.render(height=height, width=width, nodes=nodes, edges=edges, options=options)
@@ -28,7 +27,7 @@ if (len(pathway_edges)==0):
     skip_calcs=True
 else:
     skip_calcs=False
-    last_selection=optionn
+    last_selection=option
 pathway_edges=read_pathway(option)
 if skip_calcs==False:
     adj_matrix,nodes_renamed,inv_nodes_renamed=build_adj(pathway_edges)
