@@ -19,11 +19,21 @@ st.set_page_config(layout="wide")
 #Network._repr_html_ = net_repr_html
 st.sidebar.title('Choose a pathway')
 option=st.sidebar.selectbox('',pathways_name)
-w=50
-h=50
-data = np.zeros((h, w, 3), dtype=np.uint8)
-data[0:]=[255, 0, 0]
-st.sidebar.image(data, caption='Removed edges')
+w=25
+h=10
+red = np.zeros((h, w, 3), dtype=np.uint8)
+red[0:]=[255, 0, 0]
+w=25
+h=10
+green = np.zeros((h, w, 3), dtype=np.uint8)
+green[0:]=[0, 255, 0]
+w=25
+h=10
+cyan = np.zeros((h, w, 3), dtype=np.uint8)
+cyan[0:]=[0, 0, 200]
+st.sidebar.image(cyan, caption='Expression edges')
+st.sidebar.image(green, caption='Triad edges')
+st.sidebar.image(red, caption='Removed edges')
 
 skip_calcs=False
 pathway_edges=read_pathway(option)
