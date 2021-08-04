@@ -18,7 +18,7 @@ pathways_name=pd.read_csv("data/pathways.tsv", sep='\t')["pathway_name"]
 #st.sidebar.title('Choose a pathway')
 #option=st.sidebar.selectbox('',pathways_name)
 
-
+option=list(pathways_name.values)[25]
 skip_calcs=False
 pathway_edges=read_pathway(option)
 if (len(pathway_edges)==0):
