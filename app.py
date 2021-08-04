@@ -15,8 +15,8 @@ pathways_name=pd.read_csv("data/pathways.tsv", sep='\t')["pathway_name"]
 #  return html
 
 #Network._repr_html_ = net_repr_html
-st.sidebar.title('Choose a pathway')
-option=st.sidebar.selectbox('',pathways_name)
+#st.sidebar.title('Choose a pathway')
+#option=st.sidebar.selectbox('',pathways_name)
 
 
 skip_calcs=False
