@@ -19,7 +19,10 @@ st.set_page_config(layout="wide")
 #Network._repr_html_ = net_repr_html
 st.sidebar.title('Choose a pathway')
 option=st.sidebar.selectbox('',pathways_name)
-st.sidebar.image('red', caption='Removed edges')
+h,w=50
+data = np.zeros((h, w, 3), dtype=np.uint8)
+data[0:256, 0:256] = [255, 0, 0] # red patch in upper left
+st.sidebar.image(data, caption='Removed edges')
 
 skip_calcs=False
 pathway_edges=read_pathway(option)
