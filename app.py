@@ -57,7 +57,7 @@ if skip_calcs==False:
     relabel={}
     for e,node in enumerate( G.nodes()):
         relabel[e]=str(inv_nodes_renamed[node])
-    net=Network(height="1000px",notebook=True,directed=True,width="100%", bgcolor='#222222', font_color='white')
+    net=Network(height="900px",notebook=True,directed=True,width="100%", bgcolor='#222222', font_color='white')
     for i,node in relabel.items():
         net.add_node(str(node))
 
