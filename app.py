@@ -31,7 +31,7 @@ yellow = np.zeros((h, w, 3), dtype=np.uint8)
 yellow[0:]=[255, 255,0]
 st.sidebar.image(cyan, caption='Expression edges')
 st.sidebar.image(yellow, caption='Suppression edges')
-st.sidebar.image(green, caption='Triad edges')
+st.sidebar.image(green, caption='Part of triad edges')
 st.sidebar.image(red, caption='Removed edges')
 
 skip_calcs=False
