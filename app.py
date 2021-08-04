@@ -3,8 +3,7 @@ import streamlit.components.v1 as components
 import networkx as nx
 import matplotlib.pyplot as plt
 from pyvis.network import Network
-from functions import *
-import got 
+from functions import * 
 #Network(notebook=True)
 st.title('Hello Pyvis')
 
