@@ -13,7 +13,7 @@ pathways_name=pd.read_csv("data/pathways.tsv", sep='\t')["pathway_name"]
 #  nodes, edges, height, width, options = self.get_network_data()
 #  html = self.template.render(height=height, width=width, nodes=nodes, edges=edges, options=options)
 #  return html
-
+last_selection=list(pathways_name.values)[0]
 st.set_page_config(layout="wide")
 
 #Network._repr_html_ = net_repr_html
