@@ -9,11 +9,13 @@ import PIL
 
 # make Network show itself with repr_html
 pathways_name=pd.read_csv("data/pathways.tsv", sep='\t')["pathway_name"]
+tmp=pathways_name.iloc[0]
+pathways_name.iloc[0]=pathways_name.iloc[25]
+pathways_name.iloc[25]=tmp
 #def net_repr_html(self):
 #  nodes, edges, height, width, options = self.get_network_data()
 #  html = self.template.render(height=height, width=width, nodes=nodes, edges=edges, options=options)
 #  return html
-last_selection=list(pathways_name.values)[0]
 st.set_page_config(layout="wide")
 
 #Network._repr_html_ = net_repr_html
@@ -27,7 +29,7 @@ red[0:]=[255, 0, 0]
 green = np.zeros((h, w, 3), dtype=np.uint8)
 green[0:]=[0, 128, 0]
 blue = np.zeros((h, w, 3), dtype=np.uint8)
-blue[0:]=[0, 0, 255]
+blue[0:]=[30,144,255]
 yellow = np.zeros((h, w, 3), dtype=np.uint8)
 yellow[0:]=[255, 255,0]
 st.sidebar.image(blue, caption='Expression edges')
