@@ -57,7 +57,7 @@ if skip_calcs==False:
     relabel={}
     for e,node in enumerate( G.nodes()):
         relabel[e]=str(inv_nodes_renamed[node])
-    net=Network(height="825px",notebook=True,directed=True,width="950px", bgcolor='#222222', font_color='white')
+    net=Network(height="825px",notebook=True,directed=True,width="1250px", bgcolor='#222222', font_color='white')
     for i,node in relabel.items():
         net.add_node(str(node))
 
@@ -87,5 +87,5 @@ if skip_calcs==False:
     net.show("data/graph.html")
 HtmlFile = open("data/graph.html", 'r', encoding='utf-8')
 source_code = HtmlFile.read() 
-components.html(source_code, height = 850,width=1000)
+components.html(source_code, height = 850,width=1300)
 
