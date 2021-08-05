@@ -102,7 +102,7 @@ else:
                 if ((str(inv_nodes_renamed[triad[i]])+","+str(inv_nodes_renamed[triad[j]])) in to_remove) or ((str(inv_nodes_renamed[triad[j]])+","+str(inv_nodes_renamed[triad[i]])) in to_remove):                    
                     color="red"
                     size=10
-                    value+=", significativity:  "+str(signify_values[str(inv_nodes_renamed[triad[j]])+","+str(inv_nodes_renamed[triad[i]])])
+                    value+=", significativity:  "+str(signify_values[str(inv_nodes_renamed[triad[i]])+","+str(inv_nodes_renamed[triad[j]])])
                 else:
                     color="green"
                     size=3
