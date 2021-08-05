@@ -113,7 +113,7 @@ else:
                 if (weight==1):
                     net.add_edge(str(inv_nodes_renamed[triad[i]]), str(inv_nodes_renamed[triad[j]]), color=color, width=size,title=isessential+"Expression edge"+value)
                 else:
-                    net.add_edge(str(inv_nodes_renamed[triad[i]]), str(inv_nodes_renamed[triad[j]]), color=color, width=size,title=+isessential+"Suppression edge"+value)
+                    net.add_edge(str(inv_nodes_renamed[triad[i]]), str(inv_nodes_renamed[triad[j]]), color=color, width=size,title=isessential+"Suppression edge"+value)
     net.hrepulsion(node_distance=120, central_gravity=0.0, spring_length=100, spring_strength=0, damping=0.09)
     net.show("data/graph.html")
     HtmlFile = open("data/graph.html", 'r', encoding='utf-8')
