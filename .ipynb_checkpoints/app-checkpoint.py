@@ -75,7 +75,7 @@ else:
         else:
             essential_edges.append(x[0])
         if (ones==0):
-            signify_values[x[0]]=round((minus+zeros)/(zeros*minus+1),2)
+            signify_values[x[0]]=(minus+zeros)/(zeros*minus+1)
         else:
             signify_values[x[0]]=0
 
