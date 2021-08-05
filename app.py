@@ -72,7 +72,7 @@ else:
                 to_remove.append(x[0])
             else:
                 m=(zeros+minus)/2
-                if ((minus+zeros)/(zeros*minus+1)*zeros/(minus+1)>=((minus+zeros)/(m*m+1))*zeros/(minus+1)):
+                if ((minus+zeros)/(zeros*minus+1)*zeros/(minus+1)>((minus+zeros)/(m*m+1))*zeros/(minus+1)):
                     to_remove.append(x[0])
         else:
             essential_edges.append(x[0])
