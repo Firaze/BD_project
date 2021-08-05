@@ -36,9 +36,7 @@ def build_adj(pathway_edges):
     nodes=len(nodes)
     adj_matrix=np.zeros((nodes,nodes))
     for x in pathway_edges.values:
-        min_n=np.min([nodes_renamed[x[0]],nodes_renamed[x[1]]])
-        max_n=np.max([nodes_renamed[x[0]],nodes_renamed[x[1]]])
-        adj_matrix[min_n][max_n]=x[2]
+        adj_matrix[nodes_renamed[x[0]]][nodes_renamed[x[1]]]=x[2]
     return (adj_matrix,nodes_renamed,inv_nodes_renamed)
 
 
@@ -100,12 +98,16 @@ def calculate_weighted_edges(triad_cliques, adj_matrix,inv_nodes_renamed):
             for j,y in enumerate(triad_cliques[triad]):
                 triad_matrix[i][j]=adj_matrix[x][y]
       #  if list(triad_matrix[0])== [0, 1, 1]:
-        first_gene=(list(esets.loc[str(inv_nodes_renamed[triad_cliques[triad][0]]),:].values),0)
-        second_gene=(list(esets.loc[str(inv_nodes_renamed[triad_cliques[triad][1]]),:].values),1)
-        third_gene=(list(esets.loc[str(inv_nodes_renamed[triad_cliques[triad][2]]),:].values),2)
-        first_label=str(inv_nodes_renamed[triad_cliques[triad][0]])
-        second_label=str(inv_nodes_renamed[triad_cliques[triad][1]])
-        third_label=str(inv_nodes_renamed[triad_cliques[triad][2]])
+        zeros_count=np.array([len(np.where(x==0)[0]) for i,x in enumerate(triad_matrix) ])
+        first_index=int(np.where(zeros_count==1)[0])
+        second_index=int(np.where(zeros_count==2)[0])
+        third_index=int(np.where(zeros_count==3)[0])
+        first_label=str(inv_nodes_renamed[triad_cliques[triad][first_index]])
+        second_label=str(inv_nodes_renamed[triad_cliques[triad][second_index]])
+        third_label=str(inv_nodes_renamed[triad_cliques[triad][third_index]])
+        first_gene=(list(esets.loc[first_label,:].values),0)
+        second_gene=(list(esets.loc[second_label,:].values),1)
+        third_gene=(list(esets.loc[third_label,:].values),2)
        # elif list(triad_matrix[0])== [0, -1, -1]:
           #  first_gene=(list(esets.loc[str(inv_nodes_renamed[triad_cliques[triad][2]]),:].values),2)
             #second_gene=(list(esets.loc[str(inv_nodes_renamed[triad_cliques[triad][1]]),:].values),1)
