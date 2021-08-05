@@ -21,6 +21,7 @@ st.set_page_config(layout="wide")
 #Network._repr_html_ = net_repr_html
 st.sidebar.title('Choose a pathway')
 option=st.sidebar.selectbox('',pathways_name)
+normal_edges=st.sidebar.checkbox('Show expression/suppression edges')
 st.sidebar.text("Edge legend:")
 w=25
 h=5
@@ -86,11 +87,12 @@ else:
     for i,node in relabel.items():
         net.add_node(str(node))
 
-    for edge in pathway_edges.values:
-            if(edge[2]==-1):
-                net.add_edge(str(edge[0]), str(edge[1]), color="yellow")
-            else:
-                net.add_edge(str(edge[0]), str(edge[1]))
+    if (normal_edges):
+        for edge in pathway_edges.values:
+                if(edge[2]==-1):
+                    net.add_edge(str(edge[0]), str(edge[1]), color="yellow")
+                else:
+                    net.add_edge(str(edge[0]), str(edge[1]))
     for triad in triad_cliques:
         for i,x in enumerate(triad):
             for j,y in enumerate(triad):
