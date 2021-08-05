@@ -7,21 +7,20 @@ from functions import *
 import PIL
 #Network(notebook=True)
 
-# make Network show itself with repr_html
+# makes Network show itself with repr_html
 pathways_name=pd.read_csv("data/pathways.tsv", sep='\t')["pathway_name"]
+
+#excange of pathway to make easier the findings of the (interesting) pathway on the 25th position 
 tmp=pathways_name.iloc[0]
 pathways_name.iloc[0]=pathways_name.iloc[25]
 pathways_name.iloc[25]=tmp
-#def net_repr_html(self):
-#  nodes, edges, height, width, options = self.get_network_data()
-#  html = self.template.render(height=height, width=width, nodes=nodes, edges=edges, options=options)
-#  return html
+
 st.set_page_config(layout="wide")
 
-#Network._repr_html_ = net_repr_html
+#populating sidebar
 st.sidebar.title('Choose a pathway')
 option=st.sidebar.selectbox('',pathways_name)
-normal_edges=st.sidebar.checkbox('Show expression/suppression edges')
+normal_edges=st.sidebar.checkbox('Show expression/suppression edges',value)
 removed_edges=st.sidebar.checkbox('Show removed edges',value=True)
 st.sidebar.text("Edge legend:")
 w=25
@@ -39,8 +38,12 @@ st.sidebar.image(yellow, caption='Suppression edges')
 st.sidebar.image(green, caption='Part of triad edges')
 st.sidebar.image(red, caption='Removed edges')
 
+
+#skip_calcs if an invalid pathways was selected
 skip_calcs=False
+#selects pathway
 pathway_edges=read_pathway(option)
+#checks if the pathway is invalid
 if (len(pathway_edges)==0):
     #option=last_selection
     skip_calcs=True
@@ -49,56 +52,42 @@ else:
     skip_calcs=False
     #last_selection=option
     pathway_edges=read_pathway(option)
+    #calculates the adj_matrix and the dictionary to find the nodes, with new names, in the matrix
     adj_matrix,nodes_renamed,inv_nodes_renamed=build_adj(pathway_edges)
     G = nx.from_numpy_matrix(adj_matrix)
+    #gets the triads
     triad_cliques=get_triad(G)
+    #does the SEM analysis, weight every edge and remove any invalid triad in the list of cliques
     weighted_edges,triad_cliques=calculate_weighted_edges(triad_cliques, adj_matrix,inv_nodes_renamed)
-    to_remove=[]
-    signify_values={}
-    essential_edges=[]
-    for x in weighted_edges.items():
-        zeros=0
-        ones=0
-        minus=0
-        for z in x[1]:
-            if (z[1]==0):
-                zeros+=1
-            elif (z[1]==1):
-                ones+=1
-            else:
-                minus+=1
-        if (ones==0):
-            if (minus==0):
-                to_remove.append(x[0])
-            else:
-                m=(zeros+minus)/2
-                if ((minus+zeros)/(zeros*minus+1)*zeros/(minus+1)>((minus+zeros)/(m*m+1))*zeros/(minus+1)):
-                    to_remove.append(x[0])
-        else:
-            essential_edges.append(x[0])
-        if (ones==0):
-            signify_values[x[0]]=round((minus+zeros)/(zeros*minus+1)*(zeros)/(minus+1),3)
-        else:
-            signify_values[x[0]]=0
-
+    #calculate which edges must be removed, the edges that must be kept and all their significative values 
+    to_remove, signify_values, essential_edges=evaluate_edges(weighted_edges):
     relabel={}
+    #relabel the nodes of the graph to obtain the real names of the genes
     for e,node in enumerate( G.nodes()):
         relabel[e]=str(inv_nodes_renamed[node])
     net=Network(height="825px",notebook=True,directed=True,width="1800px", bgcolor='#222222', font_color='white')
+    
+    #filters the nodes if the user wants to show only triad results
     triad_nodes=set()
     _=[triad_nodes.add(str(inv_nodes_renamed[y])) for x in triad_cliques for y in x]
     triad_nodes=list(triad_nodes)
+    
+    #adds nodes in the grapg
     for i,node in relabel.items():
         if normal_edges:
             net.add_node(str(node))
+        #add only triad nodes if the user wants triad related results
         elif node in triad_nodes:
             net.add_node(str(node))
+    #same for the edges
     if (normal_edges):
         for edge in pathway_edges.values:
                 if(edge[2]==-1):
                     net.add_edge(str(edge[0]), str(edge[1]), color="yellow")
                 else:
                     net.add_edge(str(edge[0]), str(edge[1]))
+    #colors the edge of green if it is not removed, red otherwise
+    #also assigns the values, calculated some lines above, to each edge
     for triad in triad_cliques:
         for i,x in enumerate(triad):
             for j,y in enumerate(triad):
@@ -113,7 +102,7 @@ else:
                     if (removed_edges==False):
                         continue
                     color="red"
-                    size=10
+                    size=3
                     value+=", significativity:  "+str(signify_values[str(start_node)+","+str(to_node)])
                 else:
                     color="green"
@@ -125,8 +114,10 @@ else:
                     net.add_edge(str(start_node), str(to_node), color=color, width=size,title=isessential+"Expression edge"+value)
                 else:
                     net.add_edge(str(start_node), str(to_node), color=color, width=size,title=isessential+"Suppression edge"+value)
+    #sets the garph
     net.hrepulsion(node_distance=120, central_gravity=0.0, spring_length=100, spring_strength=0, damping=0.09)
     net.show("data/graph.html")
+    #reads and shows the graph
     HtmlFile = open("data/graph.html", 'r', encoding='utf-8')
     source_code = HtmlFile.read() 
     components.html(source_code, height = 850,width=1850)
