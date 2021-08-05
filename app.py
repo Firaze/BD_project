@@ -82,7 +82,7 @@ else:
     relabel={}
     for e,node in enumerate( G.nodes()):
         relabel[e]=str(inv_nodes_renamed[node])
-    net=Network(height="825px",notebook=True,directed=True,width="1800px", bgcolor='#222222', font_color='white')
+    net=Network(height="825px",notebook=False,directed=True,width="1800px", bgcolor='#222222', font_color='white')
     for i,node in relabel.items():
         net.add_node(str(node))
 
