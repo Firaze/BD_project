@@ -86,7 +86,7 @@ else:
         relabel[e]=str(inv_nodes_renamed[node])
     net=Network(height="825px",notebook=True,directed=True,width="1800px", bgcolor='#222222', font_color='white')
     triad_nodes=set()
-    _=[triad_nodes.add(inv_nodes_renamed[y]) for x in triad_cliques for y in x]
+    _=[triad_nodes.add(str(inv_nodes_renamed[y])) for x in triad_cliques for y in x]
     triad_nodes=list(triad_nodes)
     for i,node in relabel.items():
         if normal_edges:
