@@ -69,11 +69,12 @@ else:
             if (minus==0):
                 to_remove.append(x[0])
             else:
-                if (zeros/minus>1):
+                m=(zeros+minus)/2
+                if ((zeros*minus)/(minus+zeros)>=((m+1)*(m-1))/(minus+zeros)):
                     to_remove.append(x[0])
         else:
             essential_edges.append(x[0])
-        signify_values[x[0]]=round(zeros/minus,2)
+        signify_values[x[0]]=round((zeros*minus)/(minus+zeros),2)
 
     relabel={}
     for e,node in enumerate( G.nodes()):
