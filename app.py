@@ -22,6 +22,7 @@ st.set_page_config(layout="wide")
 st.sidebar.title('Choose a pathway')
 option=st.sidebar.selectbox('',pathways_name)
 normal_edges=st.sidebar.checkbox('Show expression/suppression edges')
+removed_edges=st.sidebar.checkbox('Show removed edges',value=True)
 st.sidebar.text("Edge legend:")
 w=25
 h=5
@@ -103,7 +104,7 @@ else:
                     start_node,to_node,weight=tmp[0]
                 else:
                     continue
-                if ((str(start_node)+","+str(to_node)) in to_remove):           
+                if ((str(start_node)+","+str(to_node)) in to_remove) and (removed_edges):           
                     color="red"
                     size=10
                     value+=", significativity:  "+str(signify_values[str(start_node)+","+str(to_node)])
