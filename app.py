@@ -20,7 +20,7 @@ st.set_page_config(layout="wide")
 #populating sidebar
 st.sidebar.title('Choose a pathway')
 option=st.sidebar.selectbox('',pathways_name)
-normal_edges=st.sidebar.checkbox('Show expression/suppression edges',value)
+normal_edges=st.sidebar.checkbox('Show expression/suppression edges')
 removed_edges=st.sidebar.checkbox('Show removed edges',value=True)
 st.sidebar.text("Edge legend:")
 w=25
