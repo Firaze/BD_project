@@ -96,6 +96,9 @@ else:
             for j,y in enumerate(triad):
                 value=""
                 isessential=""
+                weight=pathway_edges[(pathway_edges[0]==inv_nodes_renamed[triad[i]]) & (pathway_edges[1]==inv_nodes_renamed[triad[j]])]
+                if (weight.empty):
+                    continue
                 if ((str(inv_nodes_renamed[triad[i]])+","+str(inv_nodes_renamed[triad[j]])) in to_remove) or ((str(inv_nodes_renamed[triad[j]])+","+str(inv_nodes_renamed[triad[i]])) in to_remove):                    
                     color="red"
                     size=10
@@ -106,9 +109,6 @@ else:
                     value+=", significativity:  "+str(signify_values[str(inv_nodes_renamed[triad[j]])+","+str(inv_nodes_renamed[triad[i]])])
                 if ((str(inv_nodes_renamed[triad[i]])+","+str(inv_nodes_renamed[triad[j]])) in essential_edges) or ((str(inv_nodes_renamed[triad[j]])+","+str(inv_nodes_renamed[triad[i]])) in essential_edges):
                     isessential="Essential "
-                weight=pathway_edges[(pathway_edges[0]==inv_nodes_renamed[triad[i]]) & (pathway_edges[1]==inv_nodes_renamed[triad[j]])]
-                if (weight.empty):
-                    continue
                 weight=int(weight[2].values)
                 if (weight==1):
                     net.add_edge(str(inv_nodes_renamed[triad[i]]), str(inv_nodes_renamed[triad[j]]), color=color, width=size,title=isessential+"Expression edge"+value)
