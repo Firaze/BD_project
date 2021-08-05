@@ -117,8 +117,8 @@ else:
                 else:
                     net.add_edge(str(inv_nodes_renamed[min_node]), str(inv_nodes_renamed[max_node]), color=color, width=size,title=isessential+"Suppression edge"+value)
     net.hrepulsion(node_distance=120, central_gravity=0.0, spring_length=100, spring_strength=0, damping=0.09)
-    net.show("graph.html")
-    HtmlFile = open("graph.html", 'r', encoding='utf-8')
+    net.show("data/graph.html")
+    HtmlFile = open("data/graph.html", 'r', encoding='utf-8')
     source_code = HtmlFile.read() 
     components.html(source_code, height = 850,width=1850)
 
