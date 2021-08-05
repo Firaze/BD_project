@@ -52,7 +52,7 @@ else:
     triad_cliques=get_triad(G)
     weighted_edges=calculate_weighted_edges(triad_cliques, adj_matrix,inv_nodes_renamed)
     to_remove=[]
-    to_remove_values={}
+    signify_values={}
     essential_edges=[]
     for x in weighted_edges.items():
         zeros=0
@@ -71,9 +71,9 @@ else:
             else:
                 if (zeros/minus>1):
                     to_remove.append(x[0])
-                    to_remove_values[x[0]]=round(zeros/minus,2)
         else:
             essential_edges.append(x[0])
+        signify_values[x[0]]=round(zeros/minus,2)
 
     relabel={}
     for e,node in enumerate( G.nodes()):
@@ -95,11 +95,11 @@ else:
                 if ((str(inv_nodes_renamed[triad[i]])+","+str(inv_nodes_renamed[triad[j]])) in to_remove) or ((str(inv_nodes_renamed[triad[j]])+","+str(inv_nodes_renamed[triad[i]])) in to_remove):                    
                     color="red"
                     size=10
-                    value+=", significativity:  "+str(to_remove_values[str(inv_nodes_renamed[triad[j]])+","+str(inv_nodes_renamed[triad[i]])])
+                    value+=", significativity:  "+str(signify_values[str(inv_nodes_renamed[triad[j]])+","+str(inv_nodes_renamed[triad[i]])])
                 else:
                     color="green"
                     size=3
-                    value+=", significativity:  "+str(to_remove_values[str(inv_nodes_renamed[triad[j]])+","+str(inv_nodes_renamed[triad[i]])])
+                    value+=", significativity:  "+str(signify_values[str(inv_nodes_renamed[triad[j]])+","+str(inv_nodes_renamed[triad[i]])])
                 if ((str(inv_nodes_renamed[triad[i]])+","+str(inv_nodes_renamed[triad[j]])) in essential_edges) or ((str(inv_nodes_renamed[triad[j]])+","+str(inv_nodes_renamed[triad[i]])) in essential_edges):
                     isessential="Essential "
                 weight=pathway_edges[(pathway_edges[0]==inv_nodes_renamed[triad[i]]) & (pathway_edges[1]==inv_nodes_renamed[triad[j]])]
