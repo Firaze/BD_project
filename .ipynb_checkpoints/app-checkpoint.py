@@ -106,7 +106,7 @@ else:
                 else:
                     color="green"
                     size=3
-                    value+=", significativity:  "+str(signify_values[str(inv_nodes_renamed[triad[j]])+","+str(inv_nodes_renamed[triad[i]])])
+                    value+=", significativity:  "+str(signify_values[str(inv_nodes_renamed[triad[i]])+","+str(inv_nodes_renamed[triad[j]])])
                 if ((str(inv_nodes_renamed[triad[i]])+","+str(inv_nodes_renamed[triad[j]])) in essential_edges) or ((str(inv_nodes_renamed[triad[j]])+","+str(inv_nodes_renamed[triad[i]])) in essential_edges):
                     isessential="Essential "
                 weight=int(weight[2].values)
