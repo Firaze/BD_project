@@ -70,12 +70,12 @@ else:
                 to_remove.append(x[0])
             else:
                 m=(zeros+minus)/2
-                if ((minus+zeros)/(zeros*minus+1)*zeros/(minus+zeros)>((minus+zeros)/(m*m+1))*zeros/(minus+zeros)):
+                if ((minus+zeros)/(zeros*minus+1)*zeros/(minus+1)>((minus+zeros)/(m*m+1))*zeros/(minus+1)):
                     to_remove.append(x[0])
         else:
             essential_edges.append(x[0])
         if (ones==0):
-            signify_values[x[0]]=(minus+zeros)/(zeros*minus+1)*zeros/(minus+zeros)
+            signify_values[x[0]]=round((minus+zeros)/(zeros*minus+1)*(zeros)/(minus+1),3)
         else:
             signify_values[x[0]]=0
 
