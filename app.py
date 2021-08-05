@@ -104,12 +104,11 @@ else:
                     start_node,to_node,weight=tmp[0]
                 else:
                     continue
-                if ((str(start_node)+","+str(to_node)) in to_remove): 
+                if ((str(start_node)+","+str(to_node)) in to_remove) and (removed_edges):           
                     color="red"
                     size=10
-                    if removed_edges:      
-                        value+=", significativity:  "+str(signify_values[str(start_node)+","+str(to_node)])
-                else:
+                    value+=", significativity:  "+str(signify_values[str(start_node)+","+str(to_node)])
+                elif ((str(start_node)+","+str(to_node)) not in to_remove):
                     color="green"
                     size=3
                     value+=", significativity:  "+str(signify_values[str(start_node)+","+str(to_node)])
