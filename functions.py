@@ -86,6 +86,7 @@ def get_triad(G):
     
 def calculate_weighted_edges(triad_cliques, adj_matrix,inv_nodes_renamed):
     weighted_edges={}
+    new_triad_cliques=[]
     first_label=""
     second_label=""
     third_label=""
@@ -99,6 +100,10 @@ def calculate_weighted_edges(triad_cliques, adj_matrix,inv_nodes_renamed):
                 triad_matrix[i][j]=adj_matrix[x][y]
       #  if list(triad_matrix[0])== [0, 1, 1]:
         zeros_count=np.array([len(np.where(x==0)[0]) for i,x in enumerate(triad_matrix) ])
+        if (sum(zeros_count)==6):
+            new_triad_cliques.append(triad_cliques[triad])
+        else:
+            continue
         first_index=int(np.where(zeros_count==1)[0])
         second_index=int(np.where(zeros_count==2)[0])
         third_index=int(np.where(zeros_count==3)[0])
@@ -167,7 +172,7 @@ def calculate_weighted_edges(triad_cliques, adj_matrix,inv_nodes_renamed):
                 weighted_edges[first_label+","+second_label].append((r.x[1],-1))
             else:
                 weighted_edges[first_label+","+second_label]=[(r.x[1],-1)]
-    return weighted_edges
+    return weighted_edges, new_triad_cliques
 
 
 

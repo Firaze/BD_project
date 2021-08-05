@@ -50,7 +50,7 @@ else:
     adj_matrix,nodes_renamed,inv_nodes_renamed=build_adj(pathway_edges)
     G = nx.from_numpy_matrix(adj_matrix)
     triad_cliques=get_triad(G)
-    weighted_edges=calculate_weighted_edges(triad_cliques, adj_matrix,inv_nodes_renamed)
+    weighted_edges,triad_cliques=calculate_weighted_edges(triad_cliques, adj_matrix,inv_nodes_renamed)
     to_remove=[]
     signify_values={}
     essential_edges=[]
