@@ -92,30 +92,30 @@ else:
             else:
                 net.add_edge(str(edge[0]), str(edge[1]))
     for triad in triad_cliques:
-    for i,x in enumerate(triad):
-        for j,y in enumerate(triad):
-            value=""
-            isessential=""
-            min_node=min(triad[i],triad[j])
-            max_node=max(triad[i],triad[j])
-            weight=pathway_edges[(pathway_edges[0]==inv_nodes_renamed[min_node]) & (pathway_edges[1]==inv_nodes_renamed[max_node])]
-            if (weight.empty):
-                continue
-            if ((str(inv_nodes_renamed[min_node])+","+str(inv_nodes_renamed[max_node])) in to_remove):           
-                color="red"
-                size=10
-                value+=", significativity:  "+str(signify_values[str(inv_nodes_renamed[min_node])+","+str(inv_nodes_renamed[max_node])])
-            else:
-                color="green"
-                size=3
-                value+=", significativity:  "+str(signify_values[str(inv_nodes_renamed[min_node])+","+str(inv_nodes_renamed[max_node])])
-            if ((str(inv_nodes_renamed[min_node])+","+str(inv_nodes_renamed[max_node])) in essential_edges):   
-                isessential="Essential "
-            weight=int(weight[2].values)
-            if (weight==1):
-                net.add_edge(str(inv_nodes_renamed[min_node]), str(inv_nodes_renamed[max_node]), color=color, width=size,title=isessential+"Expression edge"+value)
-            else:
-                net.add_edge(str(inv_nodes_renamed[min_node]), str(inv_nodes_renamed[max_node]), color=color, width=size,title=isessential+"Suppression edge"+value)
+        for i,x in enumerate(triad):
+            for j,y in enumerate(triad):
+                value=""
+                isessential=""
+                min_node=min(triad[i],triad[j])
+                max_node=max(triad[i],triad[j])
+                weight=pathway_edges[(pathway_edges[0]==inv_nodes_renamed[min_node]) & (pathway_edges[1]==inv_nodes_renamed[max_node])]
+                if (weight.empty):
+                    continue
+                if ((str(inv_nodes_renamed[min_node])+","+str(inv_nodes_renamed[max_node])) in to_remove):           
+                    color="red"
+                    size=10
+                    value+=", significativity:  "+str(signify_values[str(inv_nodes_renamed[min_node])+","+str(inv_nodes_renamed[max_node])])
+                else:
+                    color="green"
+                    size=3
+                    value+=", significativity:  "+str(signify_values[str(inv_nodes_renamed[min_node])+","+str(inv_nodes_renamed[max_node])])
+                if ((str(inv_nodes_renamed[min_node])+","+str(inv_nodes_renamed[max_node])) in essential_edges):   
+                    isessential="Essential "
+                weight=int(weight[2].values)
+                if (weight==1):
+                    net.add_edge(str(inv_nodes_renamed[min_node]), str(inv_nodes_renamed[max_node]), color=color, width=size,title=isessential+"Expression edge"+value)
+                else:
+                    net.add_edge(str(inv_nodes_renamed[min_node]), str(inv_nodes_renamed[max_node]), color=color, width=size,title=isessential+"Suppression edge"+value)
     net.hrepulsion(node_distance=120, central_gravity=0.0, spring_length=100, spring_strength=0, damping=0.09)
     net.show("data/graph.html")
     HtmlFile = open("data/graph.html", 'r', encoding='utf-8')
