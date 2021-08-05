@@ -105,9 +105,9 @@ else:
                 else:
                     continue
                 if ((str(start_node)+","+str(to_node)) in to_remove): 
-                    if removed_edges:
-                        color="red"
-                        size=10
+                    color="red"
+                    size=10
+                    if removed_edges:      
                         value+=", significativity:  "+str(signify_values[str(start_node)+","+str(to_node)])
                 else:
                     color="green"
